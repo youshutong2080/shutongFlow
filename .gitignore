@@ -1,0 +1,14 @@
+.idea/
+.Trashes/
+.DS_Store
+*.pyc
+__pycache__/
+node_modules/
+dist/
+*.log
+*db.sqlite3
+# celery beat schedule file
+celerybeat-schedule
+# migtations
+example/
+loonflow/
