@@ -30,4 +30,14 @@ Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
 
 ## 登陆
 
-shutongFlow中所有普通用户密码为`asdasd`，管理员为`yxuqtr`
+shutongFlow中所有普通用户
+'webb': `asdasd`，
+'ops': `asdasd`，
+'hr': `asdasd`，
+'scm': `asdasd`，
+'webb': `asdasd`，
+'lilian': `asdasd`，
+'david': `asdasd`
+
+管理员为
+'admin': `yxuqtr`
