@@ -27,3 +27,7 @@ Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm install .
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm run dev
 ```
+
+## 登陆
+
+shutongFlow中所有普通用户密码为`asdasd`，管理员为`yxuqtr`
