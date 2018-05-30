@@ -1,17 +1,22 @@
 import LayOut from '../components/LayOut'
 
+export const loginRouter = {
+  path: '/login',
+  name: 'login',
+  component: () => import('../components/Login.vue'),
+  meta: {isAdmin: true, hidden: true}
+}
+
 export const otherRouter = {
   path: '/',
   name: 'otherRouter',
   component: LayOut,
   redirect: '/ticket/new',
   children: [
-    {path: 'ownspace', name: 'ownspace_index', title: '个人中心', component: () => import('../components/OwnSpace.vue')},
-    {path: 'message', name: 'message_index', title: '消息中心', component: () => import('../components/Message.vue')},
-    {path: 'todo/:id', name: 'todo-detail', title: '工单详情', component: () => import('../components/ticket/TicketDetail.vue')},
-
+    {path: 'ownspace', name: 'ownspace_index', title: '个人中心', component: () => import('../components/OwnSpace.vue'), meta: {isAdmin: false, hidden: true}},
+    {path: 'message', name: 'message_index', title: '消息中心', component: () => import('../components/Message.vue'), meta: {isAdmin: false, hidden: true}},
   ],
-  meta: {isAdmin: false}
+  meta: {isAdmin: false, hidden: true}
 }
 
 export const appRouters = [
@@ -27,9 +32,10 @@ export const appRouters = [
       {path: 'todo', name: 'todo', title: '我的待办', icon: 'android-attach', component: () => import('../components/ticket/Todo.vue'), meta: {isAdmin: false, hidden: false}},
       {path: 'audit', name: 'audit', title: '我相关的', icon: 'android-bookmark', component: () => import('../components/ticket/Audit.vue'), meta: {isAdmin: false, hidden: false}},
       {path: 'all', name: 'all', title: '所有工单', icon: 'android-list', component: () => import('../components/ticket/All.vue'), meta: {isAdmin: true, hidden: false}},
+      {path: 'todo/:id', name: 'todo-detail', title: '工单详情', component: () => import('../components/ticket/TicketDetail.vue')},
       {path: 'detail/:id', name: 'detail', title: '工单详情', icon: 'android-list', component: () => import('../components/ticket/TicketDetail.vue'), meta: {isAdmin: true, hidden: true}},
     ],
-    meta: {isAdmin: false}
+    meta: {isAdmin: false, hidden: false}
   },
   {
     path: '/manage',
@@ -46,6 +52,7 @@ export const appRouters = [
 ]
 
 export const routers = [
+  loginRouter,
   otherRouter,
   ...appRouters
 ]

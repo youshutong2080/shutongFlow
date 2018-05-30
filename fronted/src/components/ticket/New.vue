@@ -36,7 +36,7 @@
                   <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key"></tinymce>
                   <Select v-if="item.field_type_id === 60" v-model="newForm[item.field_key]" :placeholder="$t(`field_label.${item.field_key}`)">
                     <!-- TODO: 拉取用户列表 -->
-                    <Option value="scm">王俊</Option>
+                    <Option value="webb">王俊</Option>
                     <Option value="admin">管理员</Option>
                   </Select>
                 </FormItem>
@@ -79,18 +79,16 @@ export default {
     handleWorkflow (workflow) {
       this.workflowTitle = workflow.label
       this.workflow = workflow.value
-      this.$store.dispatch('api_init_state', workflow.value).then(resp => {
+      this.$store.dispatch('api_init_state', {id: workflow.value}).then(resp => {
         this.init_state = resp.data.data
       })
     },
     handleButton (formName, id) {
-      // console.log(this.newForm)
       this.$refs[formName].validate(valid => {
         if (valid) {
           var data = {
             workflow_id: this.workflow,
-            transition_id: id,
-            username: 'scm'
+            transition_id: id
           }
           Object.assign(data, this.newForm)
           for (let i = 0; i < Object.keys(this.init_state.field_list).length; i++) {
@@ -99,7 +97,6 @@ export default {
             }
           }
           this.$store.dispatch('api_post_ticket', data).then(resp => {
-            console.log(resp.data)
             this.$Notice.success({title: '创建成功'})
             this.$router.push({name: 'myself'})
           }).catch(error => {

@@ -18,7 +18,7 @@
     </Row>
     <!-- 详情与操作 -->
     <Row :gutter="1" style="text-align: left; margin: 5px 0;">
-      <Col :md="{span: 18}">
+      <Col :md="{span: 24}">
         <Card id="ticket-detail">
           <template slot="title">
             <span style="font-weight: 700;">
@@ -28,7 +28,7 @@
           </template>
           <Row>
             <Form :label-width="150">
-              <Col v-for="(field, index) in ticket.field_list" :key="index" :md="{span: field.field_type_id === 55 ? 24 : 12}">
+              <Col v-for="(field, index) in shortFieldList" :key="index" :md="{span: field.field_type_id === 55 ? 24 : 12}">
                 <FormItem v-if="field.field_type_id === 35" :label="field.name || field.field_name">
                   <span>{{choiceFieldDisplay}}</span>
                 </FormItem>
@@ -39,23 +39,16 @@
                   <span>{{field.value || field.field_value}}</span>
                 </FormItem>
               </Col>
+              <Col :md="{span: 20}">
+                <FormItem label="处理意见">
+                  <Input type="textarea" placeholder="请输入处理意见"></Input>
+                </FormItem>
+              </Col>
+              <Col :md="{span: 24, offset: 2}">
+                <Button v-for="(btn, index) in transitions" :key="index" type="primary" style="margin: 0 10px;">{{btn.transition_name}}</Button>
+              </Col>
             </Form>
           </Row>
-        </Card>
-      </Col>
-      <Col :md="{span: 6}">
-        <Card :style="{height: cardHeight}">
-          <template slot="title">
-            <span style="font-weight: 700;">
-              <Icon type="ionic"></Icon>
-              <span>流转操作</span>
-            </span>
-          </template>
-          {{ticket.state_id}} <br>
-          {{stepTransition}}
-          <Form>
-            <template></template>
-          </Form>
         </Card>
       </Col>
     </Row>
@@ -74,18 +67,18 @@
       </Col>
     </Row>
 
-    <Row style="text-align: left; margin: 5px 0;">
+    <!-- <Row style="text-align: left; margin: 5px 0;">
       <Col>
         <Card>
           <template slot="title">
             <span style="font-weight: 700;">Debug</span>
           </template>
-          <span style="color: red; font-weight: 700;">Steps </span>{{steps}}
+          <span style="color: red; font-weight: 700;">Transitions </span>{{transitions}}
           <hr>
           <span style="color: red; font-weight: 700;">Ticket </span>{{ticket}}
         </Card>
       </Col>
-    </Row>
+    </Row> -->
   </div>
 </template>
 
@@ -135,13 +128,15 @@ export default {
       steps: [],
       currentStep: 1,
       cardHeight: '',
-      stepTransition: {}
+      stepTransition: {},
+      transitions: []
     }
   },
   methods: {
     init () {
-      this.$store.dispatch('api_get_ticket_detail', {id: this.ticket_id, username: 'admin'}).then(resp => {
+      this.$store.dispatch('api_get_ticket_detail', {id: this.ticket_id}).then(resp => {
         this.ticket = resp.data.data.value
+        console.log(this.ticket)
         const workflow_id = this.ticket.workflow_id
         this.$store.dispatch('api_workflows').then(resp => {
           let workflows = resp.data.data.value
@@ -151,12 +146,15 @@ export default {
             }
           })[0]
         })
-        this.$store.dispatch('api_get_ticket_transiton_list', this.ticket.id).then(resp => {
+        this.$store.dispatch('api_get_ticket_transiton_list', {id: this.ticket.id}).then(resp => {
           this.logtable.data = resp.data.data.value
         })
-        this.$store.dispatch('api_get_ticket_step_list', this.ticket.id).then(resp => {
+        this.$store.dispatch('api_get_ticket_step_list', {id: this.ticket.id}).then(resp => {
           this.steps = resp.data.data.value
         })
+        // this.$store.dispatch('api_get_ticket_transitions', {id: this.ticket.id}).then(resp => {
+        //   this.transitions = resp.data.data.value
+        // })
       }).catch(error => {
         this.$Notice.error({title: '接口错误或数据不存在！'})
       })
@@ -183,6 +181,22 @@ export default {
       })
       return result
     },
+    shortFieldList () {
+      let result = []
+      for (let i = 0; i < this.ticket.field_list.length; i++) {
+        if (this.ticket.field_list[i].field_type_id === 55) {
+          continue
+        } else {
+          result.push(this.ticket.field_list[i])
+        }
+      }
+      this.ticket.field_list.map(item => {
+        if (item.field_type_id === 55) {
+          result.push(item)
+        }
+      })
+      return result
+    }
   },
   watch: {
     steps () {

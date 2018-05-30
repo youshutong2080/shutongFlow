@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "element-ui": "^2.3.9",
     "iview": "^2.13.1",
+    "jwt-decode": "^2.2.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "mockjs": "^1.0.1-beta3",

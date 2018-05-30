@@ -18,37 +18,37 @@ Vue.component(Radio.name, Radio)
 Vue.config.productionTip = false
 
 Vue.use(iView)
-/*
-  axios.interceptors.request.use(config => {
-    if (store.state.token) {
-      config.headers.Authorization = 'JWT ' + store.state.token
-    }
-    return config
-  }, error => {
-    return Promise.reject(error)
-  })
 
-  axios.interceptors.response.use(response => {
-    return response
-  }, error => {
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          store.commit('removeStorage')
-          router.push({
-            path: '/login',
-            query: {
-              redirect: router.history.current.path
-            }
-          })
-          break
-        default:
-          return Promise.reject(error)
-      }
+axios.interceptors.request.use(config => {
+  if (store.state.token) {
+    config.headers.Authorization = 'JWT ' + store.state.token
+  }
+  return config
+}, error => {
+  return Promise.reject(error)
+})
+
+axios.interceptors.response.use(response => {
+  return response
+}, error => {
+  if (error.response) {
+    switch (error.response.status) {
+      case 401:
+        store.commit('removeStorage')
+        router.push({
+          path: '/login',
+          query: {
+            redirect: router.history.current.path
+          }
+        })
+        break
+      default:
+        return Promise.reject(error)
     }
-    return Promise.reject(error)
-  })
-*/
+  }
+  return Promise.reject(error)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

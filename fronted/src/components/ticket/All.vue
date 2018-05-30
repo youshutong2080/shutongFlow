@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     init () {
-      this.$store.dispatch('api_get_ticket_list', {username: 'admin', category: 'all'}).then(resp => {
+      this.$store.dispatch('api_get_ticket_list', {category: 'all'}).then(resp => {
         this.datatable.data = resp.data.data.value
         this.total = resp.data.data.total
       }).catch(error => {
@@ -97,7 +97,7 @@ export default {
       })
     },
     handleChangePage (page) {
-      this.$store.dispatch('api_get_ticket_list', {username: 'admin', category: 'all', page: page}).then(resp => {
+      this.$store.dispatch('api_get_ticket_list', {category: 'all', page: page}).then(resp => {
         this.datatable.data = resp.data.data.value
         this.total = resp.data.data.total
       }).catch(error => {

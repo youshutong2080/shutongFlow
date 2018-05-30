@@ -17,7 +17,7 @@
           <Icon color="white" :type="item.icon" size="22"></Icon>
         </Button>
         <DropdownMenu style="width: 230px;" slot="list">
-          <template v-for="(child, i) in item.children" v-if="!child.meta.hidden">
+          <template v-for="(child, i) in item.children">
             <DropdownItem :name="child.name" :key="i">
               <Icon :type="child.icon"></Icon>
               <span class="layout-text">{{child.title}}</span>
