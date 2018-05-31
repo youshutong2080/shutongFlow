@@ -13,8 +13,8 @@ export const otherRouter = {
   component: LayOut,
   redirect: '/ticket/new',
   children: [
-    {path: 'ownspace', name: 'ownspace_index', title: '个人中心', component: () => import('../components/OwnSpace.vue'), meta: {isAdmin: false, hidden: true}},
-    {path: 'message', name: 'message_index', title: '消息中心', component: () => import('../components/Message.vue'), meta: {isAdmin: false, hidden: true}},
+    {path: 'ownspace', name: 'ownspace_index', title: '个人中心', component: () => import('../components/OwnSpace.vue')},
+    {path: 'message', name: 'message_index', title: '消息中心', component: () => import('../components/Message.vue')},
   ],
   meta: {isAdmin: false, hidden: true}
 }
@@ -52,7 +52,7 @@ export const appRouters = [
 ]
 
 export const routers = [
-  loginRouter,
   otherRouter,
-  ...appRouters
+  ...appRouters,
+  loginRouter
 ]

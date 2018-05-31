@@ -13,7 +13,9 @@ const store = new Vuex.Store({
     menulist: [],
     currentPath: [],
     openNames: [],
-    userinfo: {},
+    userid: null,
+    expire: '',
+    username: '',
     token: ''
   },
   getters: {},
@@ -23,18 +25,18 @@ const store = new Vuex.Store({
       localStorage.token = token
     },
     decodeToken: (state, token) => {
-      state.userinfo = {
-        userid: jwt(state.token).user_id,
-        username: jwt(state.token).username,
-        expire: new Date(1000 * jwt(state.token).exp)
-      }
-      localStorage.userinfo = JSON.stringify(state.userinfo)
+      state.userid = jwt(localStorage.token).user_id
+      state.expire = new Date(1000 * jwt(localStorage.token).exp)
+      state.username = jwt(localStorage.token).username
     },
     setOpenNames: (state, name) => {
       state.openNames = [name]
     },
     setCurrentPath: (state, pathArr) => {
       state.currentPath = pathArr
+    },
+    removeStorage: state => {
+      localStorage.removeItem('token')
     }
   },
   actions: {
@@ -48,6 +50,9 @@ const store = new Vuex.Store({
           reject(error)
         })
       })
+    },
+    logout: context => {
+      context.commit('removeStorage')
     },
     api_workflows: context => {
       return new Promise((resolve, reject) => {

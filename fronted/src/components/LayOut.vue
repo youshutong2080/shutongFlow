@@ -93,6 +93,9 @@ export default {
       if (name === 'ownspace') {
         this.$router.push({name: 'ownspace_index'})
       } else {
+        this.$store.dispatch('logout')
+        this.$Notice.success({title: '登出成功，即将返回登陆页面！'})
+        this.$router.push({name: 'login'})
       }
     }
   },

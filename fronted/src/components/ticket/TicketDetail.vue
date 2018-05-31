@@ -66,19 +66,6 @@
         </Card>
       </Col>
     </Row>
-
-    <!-- <Row style="text-align: left; margin: 5px 0;">
-      <Col>
-        <Card>
-          <template slot="title">
-            <span style="font-weight: 700;">Debug</span>
-          </template>
-          <span style="color: red; font-weight: 700;">Transitions </span>{{transitions}}
-          <hr>
-          <span style="color: red; font-weight: 700;">Ticket </span>{{ticket}}
-        </Card>
-      </Col>
-    </Row> -->
   </div>
 </template>
 
@@ -136,7 +123,6 @@ export default {
     init () {
       this.$store.dispatch('api_get_ticket_detail', {id: this.ticket_id}).then(resp => {
         this.ticket = resp.data.data.value
-        console.log(this.ticket)
         const workflow_id = this.ticket.workflow_id
         this.$store.dispatch('api_workflows').then(resp => {
           let workflows = resp.data.data.value
@@ -152,9 +138,9 @@ export default {
         this.$store.dispatch('api_get_ticket_step_list', {id: this.ticket.id}).then(resp => {
           this.steps = resp.data.data.value
         })
-        // this.$store.dispatch('api_get_ticket_transitions', {id: this.ticket.id}).then(resp => {
-        //   this.transitions = resp.data.data.value
-        // })
+        this.$store.dispatch('api_get_ticket_transitions', {id: this.ticket.id}).then(resp => {
+          this.transitions = resp.data.data.value
+        })
       }).catch(error => {
         this.$Notice.error({title: '接口错误或数据不存在！'})
       })
@@ -182,20 +168,22 @@ export default {
       return result
     },
     shortFieldList () {
-      let result = []
-      for (let i = 0; i < this.ticket.field_list.length; i++) {
-        if (this.ticket.field_list[i].field_type_id === 55) {
-          continue
-        } else {
-          result.push(this.ticket.field_list[i])
+      if (this.ticket.field_list) {
+        let result = []
+        for (let i = 0; i < this.ticket.field_list.length; i++) {
+          if (this.ticket.field_list[i].field_type_id === 55) {
+            continue
+          } else {
+            result.push(this.ticket.field_list[i])
+          }
         }
+        this.ticket.field_list.map(item => {
+          if (item.field_type_id === 55) {
+            result.push(item)
+          }
+        })
+        return result
       }
-      this.ticket.field_list.map(item => {
-        if (item.field_type_id === 55) {
-          result.push(item)
-        }
-      })
-      return result
     }
   },
   watch: {
@@ -207,16 +195,11 @@ export default {
             this.stepTransition = item
           }
         })
-        console.log(this.stepTransition)
       }
     }
   },
   mounted () {
     this.init()
-    setTimeout(() => {
-      let dom = document.getElementById('ticket-detail')
-      this.cardHeight = dom.offsetHeight + 'px'
-    }, 500)
   }
 }
 </script>

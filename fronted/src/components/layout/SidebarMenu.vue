@@ -10,7 +10,7 @@
           <Icon :type="item.icon" :size="22"></Icon>
           <span class="layout-text">{{item.title}}</span>
         </template>
-        <MenuItem v-for="(child, i) in item.children" :name="child.name" v-if="!child.meta.hidden" :key="i">
+        <MenuItem v-for="(child, i) in item.children" :name="child.name" v-if="child.meta && !child.meta.hidden" :key="i">
           <Icon :type="child.icon" :size="22"></Icon>
           <span class="layout-text">{{child.title}}</span>
         </MenuItem>
