@@ -65,6 +65,13 @@ class LoonFlowTicketViewSet(ViewSet):
         resp = simplejson.loads(resp)
         return Response(resp)
 
+    def partial_update(self, request, pk=None):
+        request.data['username'] = request.user.username
+        resp = requests.patch('http://localhost:6060/api/v1.0/tickets/{}'.format(pk), data=simplejson.dumps(request.data)).text
+        print(resp)
+        resp = simplejson.loads(resp)
+        return Response(resp)
+
 
 class LoonFlowStepViewSet(ViewSet):
     authentication_classes = [JSONWebTokenAuthentication, BasicAuthentication]

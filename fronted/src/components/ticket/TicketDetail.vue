@@ -41,11 +41,11 @@
               </Col>
               <Col :md="{span: 20}">
                 <FormItem label="处理意见">
-                  <Input type="textarea" placeholder="请输入处理意见"></Input>
+                  <Input type="textarea" v-model="suggestion" placeholder="请输入处理意见"></Input>
                 </FormItem>
               </Col>
               <Col :md="{span: 24, offset: 2}">
-                <Button v-for="(btn, index) in transitions" :key="index" type="primary" style="margin: 0 10px;">{{btn.transition_name}}</Button>
+                <Button v-for="(btn, index) in transitions" :key="index" type="primary" style="margin: 0 10px;" @click="handleTicketTransition(btn)">{{btn.transition_name}}</Button>
               </Col>
             </Form>
           </Row>
@@ -116,7 +116,8 @@ export default {
       currentStep: 1,
       cardHeight: '',
       stepTransition: {},
-      transitions: []
+      transitions: [],
+      suggestion: ''
     }
   },
   methods: {
@@ -144,6 +145,23 @@ export default {
       }).catch(error => {
         this.$Notice.error({title: '接口错误或数据不存在！'})
       })
+    },
+    handleTicketTransition (btn) {
+      let data = {
+        id: this.ticket.id, 
+        data: {
+          transition_id: btn.transition_id,
+          suggestion: this.suggestion ? this.suggestion : btn.transition_name
+        }
+      }
+      this.$store.dispatch('api_handle_ticket_action', data).then(resp => {
+        console.log(resp.data)
+        this.$Notice.success({title: '处理成功'})
+        this.$router.push({name: 'todo'})
+      }).catch(error => {
+        this.$Notice.error({title: '工单处理失败'})
+        console.log(error)
+      })
     }
   },
   computed: {
@@ -168,7 +186,7 @@ export default {
       return result
     },
     shortFieldList () {
-      if (this.ticket.field_list) {
+      if (this.ticket && this.ticket.field_list) {
         let result = []
         for (let i = 0; i < this.ticket.field_list.length; i++) {
           if (this.ticket.field_list[i].field_type_id === 55) {
