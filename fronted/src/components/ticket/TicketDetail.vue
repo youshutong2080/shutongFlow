@@ -105,7 +105,7 @@ export default {
             align: 'center',
             render: (h, params) => {
               return h('div', [
-                h('span', {}, params.row.state.suggestion ? params.row.state.suggestion : '——')
+                h('span', {}, params.row.suggestion ? params.row.suggestion : '——')
               ])
             }
           }

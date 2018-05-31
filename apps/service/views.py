@@ -4,6 +4,7 @@ import requests
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import BasicAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
@@ -14,10 +15,15 @@ class LoonFlowAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format='json'):
-        username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/workflows').text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
 class LoonFlowInitStateViewSet(ViewSet):
@@ -28,7 +34,13 @@ class LoonFlowInitStateViewSet(ViewSet):
         username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
 class LoonFlowCreateTicketViewSet(ViewSet):
@@ -39,8 +51,13 @@ class LoonFlowCreateTicketViewSet(ViewSet):
         request.data['username'] = request.user.username
         resp = requests.post('http://localhost:6060/api/v1.0/tickets', data=simplejson.dumps(request.data)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
-
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 class LoonFlowTicketViewSet(ViewSet):
     authentication_classes = [JSONWebTokenAuthentication, BasicAuthentication]
@@ -57,20 +74,38 @@ class LoonFlowTicketViewSet(ViewSet):
 
         resp = requests.get(url).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
     def retrieve(self, request, pk=None):
         username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}?username={}'.format(pk, username)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
     def partial_update(self, request, pk=None):
         request.data['username'] = request.user.username
         resp = requests.patch('http://localhost:6060/api/v1.0/tickets/{}'.format(pk), data=simplejson.dumps(request.data)).text
         print(resp)
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
 class LoonFlowStepViewSet(ViewSet):
@@ -81,7 +116,13 @@ class LoonFlowStepViewSet(ViewSet):
         username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
 class LoonFlowTransitionViewSet(ViewSet):
@@ -92,7 +133,13 @@ class LoonFlowTransitionViewSet(ViewSet):
         username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
 class LoonFlowTranActionViewSet(ViewSet):
@@ -103,4 +150,10 @@ class LoonFlowTranActionViewSet(ViewSet):
         username = request.user.username
         resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username)).text
         resp = simplejson.loads(resp)
-        return Response(resp)
+        if resp['code'] == 0:
+            status_resp = status.HTTP_200_OK
+            return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
+                            status=status_resp)
+        else:
+            status_resp = status.HTTP_400_BAD_REQUEST
+            return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)

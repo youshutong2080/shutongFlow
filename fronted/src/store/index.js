@@ -65,7 +65,7 @@ const store = new Vuex.Store({
     },
     api_init_state: (context, params) => {
       return new Promise((resolve, reject) => {
-        axios.get(`/api/v1/service/init_state/${params.id}`).then(resp => {
+        axios.get(`/api/v1/service/init_state/${params.id}/`).then(resp => {
           resolve(resp)
         }).catch(error => {
           reject(error)
@@ -89,9 +89,9 @@ const store = new Vuex.Store({
         for (let i = 0; i < keys.length; i++) {
           query.push(`${keys[i]}=${params[keys[i]]}`)
         }
-        url = `/api/v1/service/tickets?${query.join('&')}`
+        url = `/api/v1/service/tickets/?${query.join('&')}`
       } else {
-        url = '/api/v1/service/tickets'
+        url = '/api/v1/service/tickets/'
       }
       console.log(url)
       return new Promise((resolve, reject) => {
