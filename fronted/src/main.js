@@ -20,8 +20,8 @@ Vue.config.productionTip = false
 Vue.use(iView)
 
 axios.interceptors.request.use(config => {
-  if (store.state.token) {
-    config.headers.Authorization = 'JWT ' + store.state.token
+  if (localStorage.token) {
+    config.headers.Authorization = 'JWT ' + localStorage.token
   }
   return config
 }, error => {
