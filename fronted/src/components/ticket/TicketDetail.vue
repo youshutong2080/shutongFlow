@@ -39,7 +39,7 @@
                   <span>{{field.value || field.field_value}}</span>
                 </FormItem>
               </Col>
-              <Col :md="{span: 20}">
+              <Col :md="{span: 20}" v-if="transitions.length > 0">
                 <FormItem label="处理意见">
                   <Input type="textarea" v-model="suggestion" placeholder="请输入处理意见"></Input>
                 </FormItem>
@@ -141,6 +141,8 @@ export default {
         })
         this.$store.dispatch('api_get_ticket_transitions', {id: this.ticket.id}).then(resp => {
           this.transitions = resp.data.data.value
+        }).catch(error => {
+          this.$Notice.info({title: '当前状态您无法处理该工单'})
         })
       }).catch(error => {
         this.$Notice.error({title: '接口错误或数据不存在！'})
@@ -155,7 +157,6 @@ export default {
         }
       }
       this.$store.dispatch('api_handle_ticket_action', data).then(resp => {
-        console.log(resp.data)
         this.$Notice.success({title: '处理成功'})
         this.$router.push({name: 'todo'})
       }).catch(error => {
