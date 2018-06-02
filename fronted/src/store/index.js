@@ -149,6 +149,15 @@ const store = new Vuex.Store({
         })
       })
 
+    },
+    api_fetch_account_list: context => {
+      return new Promise((resolve, reject) => {
+        axios.get('/api/v1/account/users/fetch-users/').then(resp => {
+          resolve(resp)
+        }).catch(error => {
+          reject(error)
+        })
+      })
     }
   }
 })

@@ -35,9 +35,10 @@
                   <!-- <Input v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" type="textarea" :placeholder="$t(`field_label.${item.field_key}`)"></Input> -->
                   <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key"></tinymce>
                   <Select v-if="item.field_type_id === 60" v-model="newForm[item.field_key]" :placeholder="$t(`field_label.${item.field_key}`)">
-                    <!-- TODO: 拉取用户列表 -->
-                    <Option value="webb">王俊</Option>
-                    <Option value="admin">管理员</Option>
+                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{user.alias}}</Option>
+                  </Select>
+                  <Select v-if="item.field_type_id === 70" v-model="newForm[item.field_key]" multiple :placeholder="$t(`field_label.${item.field_key}`)">
+                    <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{user.alias}}</Option>
                   </Select>
                 </FormItem>
               </Col>
@@ -65,6 +66,7 @@ export default {
   data () {
     return {
       workflows: [],
+      accountList: [],
       workflow: null,
       init_state: {},
       workflowTitle: ''
@@ -81,6 +83,11 @@ export default {
       this.workflow = workflow.value
       this.$store.dispatch('api_init_state', {id: workflow.value}).then(resp => {
         this.init_state = resp.data.data
+        if (this.init_state.field_list) {
+          this.$store.dispatch('api_fetch_account_list').then(resp => {
+            this.accountList = resp.data.data
+          })
+        }
       })
     },
     handleButton (formName, id) {
@@ -94,6 +101,9 @@ export default {
           for (let i = 0; i < Object.keys(this.init_state.field_list).length; i++) {
             if ([25, 30].includes(this.init_state.field_list[i].field_type_id)) {
               data[this.init_state.field_list[i].field_key] = data[this.init_state.field_list[i].field_key].format("yyyy-MM-dd hh:mm:ss")
+            }
+            if ([70].includes(this.init_state.field_list[i].field_type_id)) {
+              data[this.init_state.field_list[i].field_key] = data[this.init_state.field_list[i].field_key].join(',')
             }
           }
           this.$store.dispatch('api_post_ticket', data).then(resp => {
