@@ -87,9 +87,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
-        'NAME': 'shutong',
-        'USER': 'webb',
-        'PASSWORD': 'yxuqtr',
+        'NAME': 'shutongflow',
+        'USER': 'shutongflow',
+        'PASSWORD': '123456',
         'PORT': 3306
     }
 }
@@ -130,8 +130,15 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
 
 STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'account.ShutongUser'
 
@@ -143,7 +150,7 @@ JWT_AUTH = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -156,3 +163,56 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# UEditor settings
+UEDITER_SETTING = {
+    "fileMaxSize": 10240000,
+    "scrawlPathFormat": "",
+    "imageUrlPrefix": "",
+    "catcherFieldName": "source",
+    "snapscreenPathFormat": "",
+    "imageFieldName": "upfile",
+    "imagePathFormat": "",
+    "filePathFormat": "",
+    "scrawlMaxSize": 10485760,
+    "catcherPathFormat": "",
+    "scrawlUrlPrefix": "",
+    "videoAllowFiles": [".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg", ".ogg", ".ogv", ".mov", ".wmv",
+                        ".mp4", ".webm", ".mp3", ".wav", ".mid"],
+    "imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
+    "fileManagerListPath": "",
+    "imageManagerUrlPrefix": "",
+    "scrawlActionName": "uploadscrawl",
+    "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
+    "imageManagerListSize": 30,
+    "imageManagerActionName": "listimage",
+    "videoUrlPrefix": "",
+    "fileManagerActionName": "listfile",
+    "fileManagerAllowFiles": [".sql", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".psd.flv", ".swf", ".mkv",
+                              ".avi", ".rm", ".rmvb", ".mpeg", ".mpg", ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm",
+                              ".mp3", ".wav", ".mid", ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+                              ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml", ".exe",
+                              ".com", ".dll", ".msi"],
+    "snapscreenUrlPrefix": "",
+    "snapscreenActionName": "uploadimage",
+    "catcherLocalDomain": ["127.0.0.1", "localhost", "img.baidu.com"],
+    "imageActionName": "uploadimage",
+    "fileUrlPrefix": "",
+    "catcherActionName": "catchimage",
+    "imageManagerListPath": "",
+    "scrawlFieldName": "upfile",
+    "fileManagerUrlPrefix": "",
+    "videoActionName": "uploadvideo",
+    "fileAllowFiles": [".sql", ".jpg", ".jpeg", ".bmp", ".gif", ".png", ".xls", ".xlsx", ".rar", ".doc", ".docx",
+                       ".zip", ".pdf", ".txt", ".swf", ".wmv"],
+    "videoPathFormat": "",
+    "fileFieldName": "upfile",
+    "catcherUrlPrefix": "",
+    "catcherMaxSize": 1048576,
+    "fileManagerListSize": 30,
+    "catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"],
+    "imageMaxSize": 10485760,
+    "videoMaxSize": 10240000,
+    "fileActionName": "uploadfile",
+    "videoFieldName": "upfile"
+}

@@ -14,7 +14,7 @@
         <div class="form" v-if="!fieldEmpty">
           <Form ref="newForm" :model="newForm" :rules="newFormRules" :label-width="150">
             <Row>
-              <Col :md="{span: item.field_type_id === 55 ? 24 : 12}" v-for="(item, index) in init_state.field_list" :key="index">
+              <Col :md="{span: item.field_type_id === 55 ? 22 : 11}" v-for="(item, index) in init_state.field_list" :key="index">
                 <FormItem :label="item.name || item.field_name" :prop="item.field_key">
                   <Input v-if="item.field_type_id === 5" v-model="newForm[item.field_key]" :placeholder="$t(`field_label.${item.field_key}`)"></Input>
                   <InputNumber v-if="item.field_type_id === 15" v-model="newForm[item.field_key]" :min="0" :step="0.5" style="width: 100%;"></InputNumber>
@@ -32,8 +32,8 @@
                   <Select v-if="item.field_type_id === 45 || item.field_type_id === 35" v-model="newForm[item.field_key]" :placeholder="$t(`field_label.${item.field_key}`)">
                     <Option v-for="(choice, i) in Object.keys(item.field_choice)" :key="i" :value="choice">{{item.field_choice[choice]}}</Option>
                   </Select>
-                  <!-- <Input v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" type="textarea" :placeholder="$t(`field_label.${item.field_key}`)"></Input> -->
-                  <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key"></tinymce>
+                  <!-- <tinymce v-if="item.field_type_id === 55" v-model="newForm[item.field_key]" :id="item.field_key" :other_option="tinymceOptions"></tinymce> -->
+                  <ueditor v-if="item.field_type_id === 55" ueditorConfig="ueditorConfig" @ready="handleReady"></ueditor>
                   <Select v-if="item.field_type_id === 60" v-model="newForm[item.field_key]" :placeholder="$t(`field_label.${item.field_key}`)">
                     <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{user.alias}}</Option>
                   </Select>
@@ -54,40 +54,55 @@
         </div>
       </Card>
     </div>
+    <Spin fix v-if="loading">
+      <Icon type="load-c" size=50 class="demo-spin-icon-load"></Icon>
+      <div style="font-size: 28px;">loading...</div>
+    </Spin>
   </div>
 </template>
 
 <script>
 import Validators from '../../utils/validators'
 import {Date} from '../../utils/datetime'
+import ueditor from './components/ueditor'
 
 export default {
   name: 'new',
+  components: {
+    ueditor
+  },
   data () {
     return {
+      loading: false,
       workflows: [],
       accountList: [],
       workflow: null,
       init_state: {},
-      workflowTitle: ''
+      workflowTitle: '',
+      ueditorConfig: {}
     }
   },
   methods: {
     init () {
+      this.loading = true
       this.$store.dispatch('api_workflows').then(resp => {
         this.workflows = resp.data.data.value
+        this.loading = false
       })
     },
     handleWorkflow (workflow) {
       this.workflowTitle = workflow.label
       this.workflow = workflow.value
+      this.loading = true
       this.$store.dispatch('api_init_state', {id: workflow.value}).then(resp => {
         this.init_state = resp.data.data
         if (this.init_state.field_list) {
           this.$store.dispatch('api_fetch_account_list').then(resp => {
             this.accountList = resp.data.data
+            this.loading = false
           })
         }
+        this.loading = false
       })
     },
     handleButton (formName, id) {
@@ -117,8 +132,17 @@ export default {
         }
       })
     },
+    handleReady (instance) {
+      instance.setContent('')
+      instance.addListener('contentChange', () => {
+        for (let i = 0; i < this.init_state.field_list.length; i++) {
+          if (this.init_state.field_list[i].field_type_id === 55) {
+            this.newForm[this.init_state.field_list[i].field_key] = instance.getContent()
+          }
+        }
+      })
+    },
     reset (formName) {
-      console.log('reset button')
       this.$refs[formName].resetFields()
     }
   },

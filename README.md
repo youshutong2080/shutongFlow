@@ -1,6 +1,16 @@
 ## 进度
 
-#### 第三方调用展示基本完成 2018-05-31 00：37：00
+#### 完成申请说明富文本编辑器 2018-06-08 23:22:00
+- 新增附件和图片上传接口；
+- 配置UEditor正常使用；
+- 重新优化交互体验；
+
+#### 待办
+- 前端展示附件及图片；
+- 配置ldap实例同步脚本；
+
+## 提示：
+- 建议重新拉取代码，并重新配置数据库及服务；
 
 ## 部署
 ### shutongFlow
@@ -8,14 +18,22 @@
 ## 这里使用conda作为虚拟环境，如果你使用virtualenv只是激活命令不一样；
 Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ pip install -r apps/requirements.txt
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysql -uroot 
-> create database shutong default charset utf8;
 
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ python manage.py makemigrations
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ python manage.py migrate
+# 初始化数据库
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysql -uroot 
+> create database shutongflow default charset utf8;
+> create database loonflownew default charset utf8;
+> grant all privileges on shutongflow.* to shutongflow@127.0.0.1 identified by '123456';
+> grant all privileges on loonflownew.* to loonflownew@127.0.0.1 identified by '123456';
+
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ python manage.py makemigrations
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ python manage.py migrate
+
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/apps$ python manage.py makemigrations
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/apps$ python manage.py migrate
 
 ## 导入第三方数据（这里主要是用户数据）
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysqldump -uroot shutong < third-shutong.sql
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysqldump -uroot shutongflow < shutongflow.sql
 ## 导入loonflow数据（配置数据及用户数据）
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysqldump -uroot loonflownew < loonflownew.sql
 
@@ -26,18 +44,30 @@ Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
 ## 启动vue
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm install .
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm run dev
+
+# 如果提示npm包有安全提示可以使用以下命令进行修复
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm audit fix
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm audit fix --force
 ```
 
 ## 登陆
 
 shutongFlow中所有普通用户
+
 'webb': `asdasd`，
+
 'ops': `asdasd`，
+
 'hr': `asdasd`，
+
 'scm': `asdasd`，
+
 'webb': `asdasd`，
+
 'lilian': `asdasd`，
+
 'david': `asdasd`
 
 管理员为
+
 'admin': `yxuqtr`
