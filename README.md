@@ -1,3 +1,19 @@
+
+## 介绍
+该系统为[loonflow](https://github.com/blackholll/loonflow)第三方调用程序，可以理解为OA或运维工单系统。     
+本系统使用Vue.js + Django开发，前端展示由loonflow配置决定，可以说前端是全动态，只需要配置好loonflow即可。如果您有使用上的问题可以加入我们：QQ(558788490)。
+
+## 展示
+> 新建工单页
+> ![create-ticket](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/create-ticket.png)
+
+> 代办列表页
+> ![todo-list](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/todo-list.png)
+
+> 详情页
+> ![detail-ticket](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/detail-ticket.pn)
+
+
 ## 进度
 
 #### 完成申请说明富文本编辑器 2018-06-08 23:22:00
