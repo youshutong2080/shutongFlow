@@ -5,13 +5,13 @@
 
 ## 展示
 > 新建工单页
-> ![create-ticket](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/create-ticket.png)
+> ![create-ticket](https://github.com/youshutong2080/shutongFlow/blob/master/docs/images/create-ticket.png)
 
 > 代办列表页
-> ![todo-list](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/todo-list.png)
+> ![todo-list](https://github.com/youshutong2080/shutongFlow/blob/master/docs/images/todo-list.png)
 
 > 详情页
-> ![detail-ticket](https://github.com/youshutong2080/shutongFlow/tree/master/docs/images/detail-ticket.pn)
+> ![detail-ticket](https://github.com/youshutong2080/shutongFlow/blob/master/docs/images/detail-ticket.png)
 
 
 ## 进度
