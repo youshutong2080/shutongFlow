@@ -302,12 +302,11 @@ export default {
   font-size: 15px;
 }
 .disabled_field {
-  height: 32px;
-  overflow: visible;
+  overflow: hidden;
   display: inline-block;
   width: 100%;
+  height: 100%;
   position: relative;
-  vertical-align: middle;
   line-height: 32px;
   color: rgba(0,0,0,0.4);
 }
