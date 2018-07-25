@@ -65,7 +65,7 @@
                 </template>
               </Col>
               <Col :md="{span: 22}" v-if="transitions.length > 0">
-                <FormItem label="处理意见">
+                <FormItem label="处理意见" :prop="detailForm['suggestion']">
                   <Input type="textarea" v-model="suggestion" placeholder="请输入处理意见"></Input>
                 </FormItem>
               </Col>
@@ -183,6 +183,7 @@ export default {
       })
     },
     handleTicketTransition (formName, btn) {
+      // console.log(this.detailForm, this.detailFormRules, btn)
       this.$refs[formName].validate(valid => {
         if (valid) {
           let data = {
@@ -215,6 +216,22 @@ export default {
           return false
         }
       })
+      if (Object.keys(this.detailForm).length === 0) {
+        let data = {
+          id: this.ticket.id,
+          data: {
+            transition_id: btn.transition_id,
+            suggestion: this.suggestion ? this.suggestion : btn.transition_name
+          }
+        }
+        this.$store.dispatch('api_handle_ticket_action', data).then(resp => {
+          this.$Notice.success({title: '处理成功'})
+          this.$router.push({name: 'todo'})
+        }).catch(error => {
+          this.$Notice.error({title: '工单处理失败'})
+          console.log(error)
+        })
+      }
     }
   },
   computed: {
@@ -300,6 +317,11 @@ export default {
 <style scoped>
 .ivu-form {
   font-size: 15px;
+}
+.ivu-form-item {
+    margin-bottom: 4px;
+    vertical-align: top;
+    zoom: 1;
 }
 .disabled_field {
   overflow: hidden;
