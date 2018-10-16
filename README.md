@@ -32,11 +32,11 @@
 ### shutongFlow
 ```bash
 ## 这里使用conda作为虚拟环境，如果你使用virtualenv只是激活命令不一样；
-Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ pip install -r apps/requirements.txt
+Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ source activate loonflow
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ pip install -r apps/requirements.txt
 
 # 初始化数据库
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysql -uroot 
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ mysql -uroot
 > create database shutongflow default charset utf8;
 > create database loonflownew default charset utf8;
 > grant all privileges on shutongflow.* to shutongflow@127.0.0.1 identified by '123456';
@@ -45,45 +45,38 @@ Webb@MacBookPro ~/Developer/Python/loonflow$ source activate loonflow
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ python manage.py makemigrations
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ python manage.py migrate
 
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/apps$ python manage.py makemigrations
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/apps$ python manage.py migrate
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/apps$ python manage.py makemigrations
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/apps$ python manage.py migrate
 
 ## 导入第三方数据（这里主要是用户数据）
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysqldump -uroot shutongflow < shutongflow.sql
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysqldump -uroot shutongflow < shutongflow.sql
 ## 导入loonflow数据（配置数据及用户数据）
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow$ mysqldump -uroot loonflownew < loonflownew.sql
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysqldump -uroot loonflownew < loonflownew.sql
 
 ## 启动shutongFlow和loonflow
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/apps$ python manage.py runserver 0.0.0.0:6062
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$  python manage.py runserver 0.0.0.0:6060
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$  python manage.py runserver 0.0.0.0:6060 # 启动loonflow
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/apps$ python manage.py runserver 0.0.0.0:6062 # 启动shutongflow
 
 ## 启动vue
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm install .
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm run dev
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/fronted$ npm install .
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/fronted$ npm run dev
 
 # 如果提示npm包有安全提示可以使用以下命令进行修复
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm audit fix
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/fronted$ npm audit fix --force
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/fronted$ npm audit fix
+(shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/fronted$ npm audit fix --force
 ```
 
 ## 登陆
 
 shutongFlow中所有普通用户
 
-'webb': `asdasd`，
+- 'webb': `asdasd`，    
+- 'ops': `asdasd`，   
+- 'hr': `asdasd`，   
+- 'scm': `asdasd`，   
+- 'webb': `asdasd`，   
+- 'lilian': `asdasd`，   
+- 'david': `asdasd`   
 
-'ops': `asdasd`，
-
-'hr': `asdasd`，
-
-'scm': `asdasd`，
-
-'webb': `asdasd`，
-
-'lilian': `asdasd`，
-
-'david': `asdasd`
-
-管理员为
-
+管理员为    
 'admin': `yxuqtr`
