@@ -11,4 +11,3 @@ dist/
 celerybeat-schedule
 # migtations
 example/
-loonflow/
