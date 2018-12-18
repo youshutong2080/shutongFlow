@@ -63,6 +63,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -216,3 +217,6 @@ UEDITER_SETTING = {
     "fileActionName": "uploadfile",
     "videoFieldName": "upfile"
 }
+
+WORKFLOWBACKENDURL = "http://127.0.0.1:6060"
+WORKFLOWTOKEN = "8cd585da-3cc6-11e8-9946-784f437daad6"
