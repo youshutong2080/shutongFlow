@@ -122,7 +122,6 @@ class LoonFlowTicketViewSet(ViewSet):
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
         rstatus, resp = ins.getdata(parameters=dict(username=self.request.user.username), method='patch', url='/api/v1.0/tickets/{}'.format(pk), data=request.data)
-        print(1111, resp, rstatus, request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
