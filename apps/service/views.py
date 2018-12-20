@@ -28,7 +28,7 @@ class LoonFlowAPIView(APIView):
 
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/workflows')
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows')
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -47,7 +47,7 @@ class LoonFlowInitStateViewSet(ViewSet):
         #resp = requests.get('http://localhost:6060/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username))
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -66,7 +66,7 @@ class LoonFlowCreateTicketViewSet(ViewSet):
         #resp = requests.post('http://localhost:6060/api/v1.0/tickets', data=simplejson.dumps(request.data)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='post', url='/api/v1.0/tickets', data=request.data)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='post', url='/api/v1.0/tickets', data=request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -91,8 +91,9 @@ class LoonFlowTicketViewSet(ViewSet):
 
         #resp = requests.get(url).text
         #resp = simplejson.loads(resp)
+        page = request.query_params.get('page', 1)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url=url)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name='', page=page), method='get', url=url)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -106,7 +107,7 @@ class LoonFlowTicketViewSet(ViewSet):
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/tickets/{}?username={}'.format(pk, username))
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -140,7 +141,7 @@ class LoonFlowStepViewSet(ViewSet):
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username))
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username))
 
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
@@ -160,7 +161,7 @@ class LoonFlowTransitionViewSet(ViewSet):
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username))
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -179,7 +180,7 @@ class LoonFlowTranActionViewSet(ViewSet):
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
         ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=20, name=''), method='get', url='/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username))
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
