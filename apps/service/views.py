@@ -16,6 +16,7 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from service.serializers import LoonFlowAttachmentSerializer
 from common.upload import uploadfile
+from apps.apirequest import WorkFlowAPiRequest
 
 
 class LoonFlowAPIView(APIView):
@@ -23,8 +24,11 @@ class LoonFlowAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format='json'):
-        resp = requests.get('http://localhost:6060/api/v1.0/workflows').text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/workflows').text
+
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows')
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -32,7 +36,6 @@ class LoonFlowAPIView(APIView):
         else:
             status_resp = status.HTTP_400_BAD_REQUEST
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
-
 
 
 class LoonFlowInitStateViewSet(ViewSet):
@@ -41,8 +44,10 @@ class LoonFlowInitStateViewSet(ViewSet):
 
     def retrieve(self, request, pk=None):
         username = request.user.username
-        resp = requests.get('http://localhost:6060/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -50,7 +55,6 @@ class LoonFlowInitStateViewSet(ViewSet):
         else:
             status_resp = status.HTTP_400_BAD_REQUEST
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
-
 
 
 class LoonFlowCreateTicketViewSet(ViewSet):
@@ -59,8 +63,10 @@ class LoonFlowCreateTicketViewSet(ViewSet):
 
     def create(self, request):
         request.data['username'] = request.user.username
-        resp = requests.post('http://localhost:6060/api/v1.0/tickets', data=simplejson.dumps(request.data)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.post('http://localhost:6060/api/v1.0/tickets', data=simplejson.dumps(request.data)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='post', url='/api/v1.0/tickets', data=request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -68,7 +74,6 @@ class LoonFlowCreateTicketViewSet(ViewSet):
         else:
             status_resp = status.HTTP_400_BAD_REQUEST
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
-
 
 
 class LoonFlowTicketViewSet(ViewSet):
@@ -79,13 +84,16 @@ class LoonFlowTicketViewSet(ViewSet):
         username = request.user.username
         category = request.query_params.get('category', None)
 
-        url = 'http://localhost:6060/api/v1.0/tickets?username={}'.format(username)
+        url = '/api/v1.0/tickets?username={}'.format(username)
 
         if category:
             url += '&category={}'.format(category)
 
-        resp = requests.get(url).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get(url).text
+        #resp = simplejson.loads(resp)
+        page = request.query_params.get('page', 1)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name='', page=page), method='get', url=url)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -96,8 +104,10 @@ class LoonFlowTicketViewSet(ViewSet):
 
     def retrieve(self, request, pk=None):
         username = request.user.username
-        resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}?username={}'.format(pk, username)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}?username={}'.format(pk, username)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -108,9 +118,11 @@ class LoonFlowTicketViewSet(ViewSet):
 
     def partial_update(self, request, pk=None):
         request.data['username'] = request.user.username
-        resp = requests.patch('http://localhost:6060/api/v1.0/tickets/{}'.format(pk), data=simplejson.dumps(request.data)).text
-        print(resp)
-        resp = simplejson.loads(resp)
+        #resp = requests.patch('http://localhost:6060/api/v1.0/tickets/{}'.format(pk), data=simplejson.dumps(request.data)).text
+        # print(resp)
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(parameters=dict(username=self.request.user.username), method='patch', url='/api/v1.0/tickets/{}'.format(pk), data=request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -118,7 +130,6 @@ class LoonFlowTicketViewSet(ViewSet):
         else:
             status_resp = status.HTTP_400_BAD_REQUEST
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
-
 
 
 class LoonFlowStepViewSet(ViewSet):
@@ -127,8 +138,11 @@ class LoonFlowStepViewSet(ViewSet):
 
     def retrieve(self, request, pk=None):
         username = request.user.username
-        resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username))
+
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -136,7 +150,6 @@ class LoonFlowStepViewSet(ViewSet):
         else:
             status_resp = status.HTTP_400_BAD_REQUEST
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
-
 
 
 class LoonFlowTransitionViewSet(ViewSet):
@@ -145,8 +158,10 @@ class LoonFlowTransitionViewSet(ViewSet):
 
     def retrieve(self, request, pk=None):
         username = request.user.username
-        resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -156,15 +171,16 @@ class LoonFlowTransitionViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
-
 class LoonFlowTranActionViewSet(ViewSet):
     authentication_classes = [JSONWebTokenAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, pk=None):
         username = request.user.username
-        resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username)).text
-        resp = simplejson.loads(resp)
+        #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username)).text
+        #resp = simplejson.loads(resp)
+        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -217,8 +233,8 @@ def upload_file(file_obj, file_type='pic'):
             os.makedirs(upload_folder)
         absolute_path = os.path.join(upload_folder, file_name) + '.%s' % file_postfix
         if file_postfix.lower() in (
-        "sql", "jpg", "jpeg", "bmp", "gif", "png", "xls", "xlsx", "rar", "doc", "docx", "zip", "pdf", "txt", "swf",
-        "wmv"):
+            "sql", "jpg", "jpeg", "bmp", "gif", "png", "xls", "xlsx", "rar", "doc", "docx", "zip", "pdf", "txt", "swf",
+                "wmv"):
             destination = open(absolute_path, 'wb+')
             for chunk in file_obj.chunks():
                 destination.write(chunk)
