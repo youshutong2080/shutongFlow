@@ -22,7 +22,7 @@
         <Card id="ticket-detail">
           <template slot="title">
             <span style="font-weight: 700;">
-              <Icon type="android-clipboard"></Icon> 
+              <Icon type="android-clipboard"></Icon>
               <span>{{workflow.description}}</span>
             </span>
           </template>
@@ -276,10 +276,10 @@ export default {
   },
   watch: {
     steps () {
-      if (this.steps[0] && this.steps[0].id) {
-        this.currentStep = this.ticket.state_id - this.steps[0].id
+      if (this.steps[0] && this.steps[0].state_id) {
+        this.currentStep = this.ticket.state_id - this.steps[0].state_id
         this.steps.filter(item => {
-          if (item.state_id === (this.ticket.state_id - 1)) {
+          if (item.state_id === this.ticket.state_id) {
             this.stepTransition = item
           }
         })
