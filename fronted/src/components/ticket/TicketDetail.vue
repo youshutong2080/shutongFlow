@@ -60,7 +60,7 @@
                 </template>
                 <template v-else-if="field.field_attribute === 1">
                   <FormItem :label="field.name || field.field_name">
-                    <div class="disabled_field" v-html="field.value || field.field_value"></div>
+                    <div class="disabled_field" v-html="displaySelectKey(field)"></div>
                   </FormItem>
                 </template>
               </Col>
@@ -237,6 +237,14 @@ export default {
   computed: {
     ticket_id () {
       return this.$route.params.id
+    },
+    displaySelectKey(argument) {
+      return argument => {
+        if (argument.field_type_id === 45) {
+          return argument.field_choice[argument.field_value];
+        }
+        return argument.field_value;
+      };
     },
     choiceFieldDisplay () {
       let result
