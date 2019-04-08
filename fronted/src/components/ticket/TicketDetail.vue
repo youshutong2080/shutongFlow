@@ -384,8 +384,22 @@ export default {
   watch: {
     steps() {
       if (this.steps[0] && this.steps[0].state_id) {
-        this.currentStep = this.ticket.state_id - this.steps[0].state_id;
+        let current_order_id;
+        let current = [];
+
+        for (let i in this.steps) {
+          if (this.steps[i].state_id == this.ticket.state_id) {
+            current_order_id = this.steps[i].order_id;
+          }
+          current.push(this.steps[i].order_id);
+        }
+
+        current.sort();
+
+        this.currentStep = current.indexOf(current_order_id);
+
         this.steps.filter(item => {
+          // console.log(`${item.state_id} ---> ${this.ticket.state_id}`);
           if (item.state_id === this.ticket.state_id) {
             this.stepTransition = item;
           }
