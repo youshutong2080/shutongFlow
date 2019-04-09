@@ -345,8 +345,16 @@ export default {
         return argument.field_value;
       };
     },
-    choiceFieldDisplay() {
-      let result;
+    displaySelectKey(argument) {
+      return argument => {
+        if (argument.field_type_id === 45) {
+          return argument.field_choice[argument.field_value];
+        }
+        return argument.field_value;
+      };
+    },
+    choiceFieldDisplay () {
+      let result
       this.ticket.field_list.filter(item => {
         if (item.field_type_id === 35) {
           let keys = Object.keys(item.field_choice);
