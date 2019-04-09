@@ -28,33 +28,101 @@
           </template>
           <Row>
             <Form :model="detailForm" ref="detailForm" :rules="detailFormRules" :label-width="150">
-              <Col v-for="(field, index) in shortFieldList" :key="index" :md="{span: field.field_type_id === 55 ? 22 : 11}">
+              <Col
+                v-for="(field, index) in shortFieldList"
+                :key="index"
+                :md="{span: field.field_type_id === 55 ? 22 : 11}"
+              >
                 <template v-if="field.field_attribute === 2">
-                  <FormItem v-if="field.field_type_id === 5" :label="field.name || field.field_name" :prop="field.field_key">
-                    <Input v-model="detailForm[field.field_key]" :placeholder="$t(`field_label.${field.field_key}`)"></Input>
+                  <FormItem
+                    v-if="field.field_type_id === 5"
+                    :label="field.name || field.field_name"
+                    :prop="field.field_key"
+                  >
+                    <Input
+                      v-model="detailForm[field.field_key]"
+                      :placeholder="$t(`field_label.${field.field_key}`)"
+                    ></Input>
                   </FormItem>
-                  <FormItem v-else-if="field.field_type_id === 15" :prop="field.field_key" :label="field.name || field.field_name">
-                    <InputNumber v-model="detailForm[field.field_key]" :min="0" :step="0.5" style="width: 100%;"></InputNumber>
+                  <FormItem
+                    v-else-if="field.field_type_id === 15"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
+                    <InputNumber
+                      v-model="detailForm[field.field_key]"
+                      :min="0"
+                      :step="0.5"
+                      style="width: 100%;"
+                    ></InputNumber>
                   </FormItem>
-                  <FormItem v-else-if="field.field_type_id === 30" :prop="field.field_key" :label="field.name || field.field_name">
-                    <DatePicker v-model="detailForm[field.field_key]" type="datetime" format="yyyy-MM-dd HH:mm:ss" style="width: 100%;" :placeholder="$t(`field_label.${field.field_key}`)"></DatePicker>
+                  <FormItem
+                    v-else-if="field.field_type_id === 30"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
+                    <DatePicker
+                      v-model="detailForm[field.field_key]"
+                      type="datetime"
+                      format="yyyy-MM-dd HH:mm:ss"
+                      style="width: 100%;"
+                      :placeholder="$t(`field_label.${field.field_key}`)"
+                    ></DatePicker>
                   </FormItem>
-                  <FormItem v-else-if="field.field_type_id === 40" :prop="field.field_key" :label="field.name || field.field_name">
-                    <Select v-model="detailForm[field.field_key]" multiple :placeholder="$t(`field_label.${field.field_key}`)">
-                      <Option v-for="(choice, i) in Object.keys(field.field_choice)" :key="i" :value="choice">{{field.field_choice[choice]}}</Option>
+                  <FormItem
+                    v-else-if="field.field_type_id === 40"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
+                    <Select
+                      v-model="detailForm[field.field_key]"
+                      multiple
+                      :placeholder="$t(`field_label.${field.field_key}`)"
+                    >
+                      <Option
+                        v-for="(choice, i) in Object.keys(field.field_choice)"
+                        :key="i"
+                        :value="choice"
+                      >{{field.field_choice[choice]}}</Option>
                     </Select>
                   </FormItem>
-                  <FormItem v-else-if="[35, 45].includes(field.field_type_id)" :prop="field.field_key" :label="field.name || field.field_name">
-                    <Select v-model="detailForm[field.field_key]" :placeholder="$t(`field_label.${field.field_key}`)">
-                      <Option v-for="(choice, i) in Object.keys(field.field_choice)" :key="i" :value="choice">{{field.field_choice[choice]}}</Option>
+                  <FormItem
+                    v-else-if="[35, 45].includes(field.field_type_id)"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
+                    <Select
+                      v-model="detailForm[field.field_key]"
+                      :placeholder="$t(`field_label.${field.field_key}`)"
+                    >
+                      <Option
+                        v-for="(choice, i) in Object.keys(field.field_choice)"
+                        :key="i"
+                        :value="choice"
+                      >{{field.field_choice[choice]}}</Option>
                     </Select>
                   </FormItem>
-                  <FormItem v-else-if="field.field_type_id === 60" :prop="field.field_key" :label="field.name || field.field_name">
-                    <Select v-model="detailForm[field.field_key]" :placeholder="$t(`field_label.${field.field_key}`)">
-                      <Option v-for="(user, index) in accountList" :key="index" :value="user.username">{{user.alias}}</Option>
+                  <FormItem
+                    v-else-if="field.field_type_id === 60"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
+                    <Select
+                      v-model="detailForm[field.field_key]"
+                      :placeholder="$t(`field_label.${field.field_key}`)"
+                    >
+                      <Option
+                        v-for="(user, index) in accountList"
+                        :key="index"
+                        :value="user.username"
+                      >{{user.alias}}</Option>
                     </Select>
                   </FormItem>
-                  <FormItem v-else-if="field.field_type_id === 55" :prop="field.field_key" :label="field.name || field.field_name">
+                  <FormItem
+                    v-else-if="field.field_type_id === 55"
+                    :prop="field.field_key"
+                    :label="field.name || field.field_name"
+                  >
                     <tinymce v-model="detailForm[field.field_key]" :id="field.field_key" ref="tm"></tinymce>
                   </FormItem>
                 </template>
@@ -70,7 +138,13 @@
                 </FormItem>
               </Col>
               <Col :md="{span: 24, offset: 2}">
-                <Button v-for="(btn, index) in transitions" :key="index" type="primary" style="margin: 10px 10px;" @click="handleTicketTransition('detailForm', btn)">{{btn.transition_name}}</Button>
+                <Button
+                  v-for="(btn, index) in transitions"
+                  :key="index"
+                  type="primary"
+                  style="margin: 10px 10px;"
+                  @click="handleTicketTransition('detailForm', btn)"
+                >{{btn.transition_name}}</Button>
               </Col>
             </Form>
           </Row>
@@ -95,46 +169,48 @@
 </template>
 
 <script>
-import Utils from '../../utils'
-import Validators from '../../utils/validators'
-import {Date} from '../../utils/datetime'
+import Utils from "../../utils";
+import Validators from "../../utils/validators";
+import { Date } from "../../utils/datetime";
 
 export default {
-  name: 'ticket-detail',
-  data () {
+  name: "ticket-detail",
+  data() {
     return {
       ticket: {},
       workflow: {},
       logtable: {
         columns: [
           {
-            key: 'state',
-            title: '节点名称',
-            align: 'center',
+            key: "state",
+            title: "节点名称",
+            align: "center",
             render: (h, params) => {
-              return h('div', [
-                h('span', {}, params.row.state.state_name)
-              ])
+              return h("div", [h("span", {}, params.row.state.state_name)]);
             }
           },
           {
-            key: 'participant',
-            title: '参与者',
-            align: 'center',
+            key: "participant",
+            title: "参与者",
+            align: "center"
           },
           {
-            key: 'gmt_created',
-            title: '操作时间',
-            align: 'center',
+            key: "gmt_created",
+            title: "操作时间",
+            align: "center"
           },
           {
-            key: 'suggestion',
-            title: '处理意见',
-            align: 'center',
+            key: "suggestion",
+            title: "处理意见",
+            align: "center",
             render: (h, params) => {
-              return h('div', [
-                h('span', {}, params.row.suggestion ? params.row.suggestion : '——')
-              ])
+              return h("div", [
+                h(
+                  "span",
+                  {},
+                  params.row.suggestion ? params.row.suggestion : "——"
+                )
+              ]);
             }
           }
         ],
@@ -143,46 +219,56 @@ export default {
       accountList: [],
       steps: [],
       currentStep: 1,
-      cardHeight: '',
+      cardHeight: "",
       stepTransition: {},
       transitions: [],
-      suggestion: '',
+      suggestion: "",
       detailForm: {},
       detailFormRules: {}
-    }
+    };
   },
   methods: {
-    init () {
-      this.$store.dispatch('api_get_ticket_detail', {id: this.ticket_id}).then(resp => {
-        this.ticket = resp.data.data.value
-        const workflow_id = this.ticket.workflow_id
-        this.$store.dispatch('api_workflows').then(resp => {
-          let workflows = resp.data.data.value
-          this.workflow = workflows.filter(item => {
-            if (item.id === workflow_id) {
-              return true
-            }
-          })[0]
+    init() {
+      this.$store
+        .dispatch("api_get_ticket_detail", { id: this.ticket_id })
+        .then(resp => {
+          this.ticket = resp.data.data.value;
+          const workflow_id = this.ticket.workflow_id;
+          this.$store.dispatch("api_workflows").then(resp => {
+            let workflows = resp.data.data.value;
+            this.workflow = workflows.filter(item => {
+              if (item.id === workflow_id) {
+                return true;
+              }
+            })[0];
+          });
+          this.$store
+            .dispatch("api_get_ticket_transiton_list", { id: this.ticket.id })
+            .then(resp => {
+              this.logtable.data = resp.data.data.value;
+            });
+          this.$store
+            .dispatch("api_get_ticket_step_list", { id: this.ticket.id })
+            .then(resp => {
+              this.steps = resp.data.data.value;
+            });
+          this.$store
+            .dispatch("api_get_ticket_transitions", { id: this.ticket.id })
+            .then(resp => {
+              this.transitions = resp.data.data.value;
+            })
+            .catch(error => {
+              this.$Notice.info({ title: "当前状态您无法处理该工单" });
+            });
+          this.$store.dispatch("api_fetch_account_list").then(resp => {
+            this.accountList = resp.data.data;
+          });
         })
-        this.$store.dispatch('api_get_ticket_transiton_list', {id: this.ticket.id}).then(resp => {
-          this.logtable.data = resp.data.data.value
-        })
-        this.$store.dispatch('api_get_ticket_step_list', {id: this.ticket.id}).then(resp => {
-          this.steps = resp.data.data.value
-        })
-        this.$store.dispatch('api_get_ticket_transitions', {id: this.ticket.id}).then(resp => {
-          this.transitions = resp.data.data.value
-        }).catch(error => {
-          this.$Notice.info({title: '当前状态您无法处理该工单'})
-        })
-        this.$store.dispatch('api_fetch_account_list').then(resp => {
-          this.accountList = resp.data.data
-        })
-      }).catch(error => {
-        this.$Notice.error({title: '接口错误或数据不存在！'})
-      })
+        .catch(error => {
+          this.$Notice.error({ title: "接口错误或数据不存在！" });
+        });
     },
-    handleTicketTransition (formName, btn) {
+    handleTicketTransition(formName, btn) {
       // console.log(this.detailForm, this.detailFormRules, btn)
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -190,32 +276,42 @@ export default {
             id: this.ticket.id,
             data: {
               transition_id: btn.transition_id,
-              suggestion: this.suggestion ? this.suggestion : btn.transition_name
+              suggestion: this.suggestion
+                ? this.suggestion
+                : btn.transition_name
             }
-          }
-          let formData = {}
-          let detailFormKeys = Object.keys(this.detailForm)
-          let fieldList = this.ticket.field_list
+          };
+          let formData = {};
+          let detailFormKeys = Object.keys(this.detailForm);
+          let fieldList = this.ticket.field_list;
           for (let i = 0; i < fieldList.length; i++) {
             for (let j = 0; j < detailFormKeys.length; j++) {
-              if ([25, 30].includes(fieldList[i].field_type_id) && fieldList[i].field_key === detailFormKeys[j]) {
-                this.detailForm[detailFormKeys[j]] = this.detailForm[detailFormKeys[j]].format("yyyy-MM-dd hh:mm:ss")
+              if (
+                [25, 30].includes(fieldList[i].field_type_id) &&
+                fieldList[i].field_key === detailFormKeys[j]
+              ) {
+                this.detailForm[detailFormKeys[j]] = this.detailForm[
+                  detailFormKeys[j]
+                ].format("yyyy-MM-dd hh:mm:ss");
               }
             }
           }
-          Object.assign(data.data, this.detailForm)
-          this.$store.dispatch('api_handle_ticket_action', data).then(resp => {
-            this.$Notice.success({title: '处理成功'})
-            this.$router.push({name: 'todo'})
-          }).catch(error => {
-            this.$Notice.error({title: '工单处理失败'})
-            console.log(error)
-          })
+          Object.assign(data.data, this.detailForm);
+          this.$store
+            .dispatch("api_handle_ticket_action", data)
+            .then(resp => {
+              this.$Notice.success({ title: "处理成功" });
+              this.$router.push({ name: "todo" });
+            })
+            .catch(error => {
+              this.$Notice.error({ title: "工单处理失败" });
+              console.log(error);
+            });
         } else {
-          console.log('form error')
-          return false
+          console.log("form error");
+          return false;
         }
-      })
+      });
       if (Object.keys(this.detailForm).length === 0) {
         let data = {
           id: this.ticket.id,
@@ -223,20 +319,31 @@ export default {
             transition_id: btn.transition_id,
             suggestion: this.suggestion ? this.suggestion : btn.transition_name
           }
-        }
-        this.$store.dispatch('api_handle_ticket_action', data).then(resp => {
-          this.$Notice.success({title: '处理成功'})
-          this.$router.push({name: 'todo'})
-        }).catch(error => {
-          this.$Notice.error({title: '工单处理失败'})
-          console.log(error)
-        })
+        };
+        this.$store
+          .dispatch("api_handle_ticket_action", data)
+          .then(resp => {
+            this.$Notice.success({ title: "处理成功" });
+            this.$router.push({ name: "todo" });
+          })
+          .catch(error => {
+            this.$Notice.error({ title: "工单处理失败" });
+            console.log(error);
+          });
       }
     }
   },
   computed: {
-    ticket_id () {
-      return this.$route.params.id
+    ticket_id() {
+      return this.$route.params.id;
+    },
+    displaySelectKey(argument) {
+      return argument => {
+        if (argument.field_type_id === 45) {
+          return argument.field_choice[argument.field_value];
+        }
+        return argument.field_value;
+      };
     },
     displaySelectKey(argument) {
       return argument => {
@@ -250,76 +357,100 @@ export default {
       let result
       this.ticket.field_list.filter(item => {
         if (item.field_type_id === 35) {
-          let keys = Object.keys(item.field_choice)
+          let keys = Object.keys(item.field_choice);
           for (let i = 0; i < keys.length; i++) {
             if (item.value === keys[i] || item.field_value === keys[i]) {
-              result = item.field_choice[keys[i]]
+              result = item.field_choice[keys[i]];
             }
           }
           if (!result) {
-            result = '——'
+            result = "——";
           }
         }
-      })
-      return result
+      });
+      return result;
     },
-    shortFieldList () {
+    shortFieldList() {
       if (this.ticket && this.ticket.field_list) {
-        let result = []
+        let result = [];
         for (let i = 0; i < this.ticket.field_list.length; i++) {
           if (this.ticket.field_list[i].field_type_id === 55) {
-            continue
+            continue;
           } else {
-            result.push(this.ticket.field_list[i])
+            result.push(this.ticket.field_list[i]);
           }
         }
         this.ticket.field_list.map(item => {
           if (item.field_type_id === 55) {
-            result.push(item)
+            result.push(item);
           }
-        })
-        return result
+        });
+        return result;
       }
-    },
+    }
   },
   watch: {
-    steps () {
+    steps() {
       if (this.steps[0] && this.steps[0].state_id) {
-        this.currentStep = this.ticket.state_id - this.steps[0].state_id
-        this.steps.filter(item => {
-          if (item.state_id === this.ticket.state_id) {
-            this.stepTransition = item
+        let current_order_id;
+        let current = [];
+
+        for (let i in this.steps) {
+          if (this.steps[i].state_id == this.ticket.state_id) {
+            current_order_id = this.steps[i].order_id;
           }
-        })
+          current.push(this.steps[i].order_id);
+        }
+
+        current.sort();
+
+        this.currentStep = current.indexOf(current_order_id);
+
+        this.steps.filter(item => {
+          // console.log(`${item.state_id} ---> ${this.ticket.state_id}`);
+          if (item.state_id === this.ticket.state_id) {
+            this.stepTransition = item;
+          }
+        });
       }
     },
-    ticket () {
-      let fieldList = this.ticket.field_list
+    ticket() {
+      let fieldList = this.ticket.field_list;
       for (let i = 0; i < fieldList.length; i++) {
         if (fieldList[i].field_attribute === 2) {
           // 动态设置detailForm表单默认值
-          this.detailForm[fieldList[i].field_key] = fieldList[i].value || fieldList[i].field_value
+          this.detailForm[fieldList[i].field_key] =
+            fieldList[i].value || fieldList[i].field_value;
           // 动态设置detailForm表单验证
           if ([5, 35, 45, 55, 60].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [{required: true, type: 'string', trigger: 'blur'}]
+            this.detailFormRules[fieldList[i].field_key] = [
+              { required: true, type: "string", trigger: "blur" }
+            ];
           } else if ([25, 30].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [{required: true, type: 'date', trigger: 'blur'}]
+            this.detailFormRules[fieldList[i].field_key] = [
+              { required: true, type: "date", trigger: "blur" }
+            ];
           } else if ([40, 50, 70].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [{required: true, type: 'array', trigger: 'blur'}]
+            this.detailFormRules[fieldList[i].field_key] = [
+              { required: true, type: "array", trigger: "blur" }
+            ];
           } else if ([10, 15].includes(fieldList[i].field_type_id)) {
-            this.detailFormRules[fieldList[i].field_key] = [{required: true, type: 'number', trigger: 'blur'}]
+            this.detailFormRules[fieldList[i].field_key] = [
+              { required: true, type: "number", trigger: "blur" }
+            ];
           } else if (fieldList[i].field_type_id === 20) {
-            this.detailFormRules[fieldList[i].field_type_id] = [{required: true, type: 'boolean', trigger: 'blur'}]
+            this.detailFormRules[fieldList[i].field_type_id] = [
+              { required: true, type: "boolean", trigger: "blur" }
+            ];
           }
         }
       }
-
     }
   },
-  mounted () {
-    this.init()
+  mounted() {
+    this.init();
   }
-}
+};
 </script>
 
 <style scoped>
@@ -327,9 +458,9 @@ export default {
   font-size: 15px;
 }
 .ivu-form-item {
-    margin-bottom: 4px;
-    vertical-align: top;
-    zoom: 1;
+  margin-bottom: 4px;
+  vertical-align: top;
+  zoom: 1;
 }
 .disabled_field {
   overflow: hidden;
@@ -338,6 +469,6 @@ export default {
   height: 100%;
   position: relative;
   line-height: 32px;
-  color: rgba(0,0,0,0.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 </style>
