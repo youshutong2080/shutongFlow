@@ -9,7 +9,7 @@ except ImportError:
     import json
 
 class WorkFlowAPiRequest(object):
-    def __init__(self,token=settings.WORKFLOWTOKEN,appname='ops',username='admin',workflowbackendurl=settings.WORKFLOWBACKENDURL):
+    def __init__(self,token=settings.WORKFLOWTOKEN, appname=settings.WORKFLOWAPP, username='admin', workflowbackendurl=settings.WORKFLOWBACKENDURL):
         self.token = token
         self.appname = appname
         self.username = username
@@ -19,7 +19,7 @@ class WorkFlowAPiRequest(object):
         timestamp = str(time.time())[:10]
         ori_str = timestamp + self.token
         signature = hashlib.md5(ori_str.encode(encoding='utf-8')).hexdigest()
-        headers = dict(signature=signature, timestamp=timestamp, appname=self.appname)        
+        headers = dict(signature=signature, timestamp=timestamp, appname=self.appname, username=self.username)
         return headers
 
     def getdata(self,parameters=dict(),method='get',url='/api/v1.0/workflows/',timeout=300,data=dict()):
