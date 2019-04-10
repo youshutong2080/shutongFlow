@@ -27,8 +27,8 @@ class LoonFlowAPIView(APIView):
         #resp = requests.get('http://localhost:6060/api/v1.0/workflows').text
 
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows')
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/workflows')
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -46,8 +46,8 @@ class LoonFlowInitStateViewSet(ViewSet):
         username = request.user.username
         #resp = requests.get('http://localhost:6060/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username))
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/workflows/{}/init_state?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -65,8 +65,8 @@ class LoonFlowCreateTicketViewSet(ViewSet):
         request.data['username'] = request.user.username
         #resp = requests.post('http://localhost:6060/api/v1.0/tickets', data=simplejson.dumps(request.data)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='post', url='/api/v1.0/tickets', data=request.data)
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='post', url='/api/v1.0/tickets', data=request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -92,8 +92,8 @@ class LoonFlowTicketViewSet(ViewSet):
         #resp = requests.get(url).text
         #resp = simplejson.loads(resp)
         page = request.query_params.get('page', 1)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name='', page=page), method='get', url=url)
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name='', page=page), method='get', url=url)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -106,8 +106,8 @@ class LoonFlowTicketViewSet(ViewSet):
         username = request.user.username
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}?username={}'.format(pk, username))
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -121,8 +121,8 @@ class LoonFlowTicketViewSet(ViewSet):
         #resp = requests.patch('http://localhost:6060/api/v1.0/tickets/{}'.format(pk), data=simplejson.dumps(request.data)).text
         # print(resp)
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(parameters=dict(username=self.request.user.username), method='patch', url='/api/v1.0/tickets/{}'.format(pk), data=request.data)
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(parameters={}, method='patch', url='/api/v1.0/tickets/{}'.format(pk), data=request.data)
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -140,8 +140,8 @@ class LoonFlowStepViewSet(ViewSet):
         username = request.user.username
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username))
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowsteps?username={}'.format(pk, username))
 
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
@@ -160,8 +160,8 @@ class LoonFlowTransitionViewSet(ViewSet):
         username = request.user.username
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username))
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/flowlogs?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
@@ -179,8 +179,8 @@ class LoonFlowTranActionViewSet(ViewSet):
         username = request.user.username
         #resp = requests.get('http://localhost:6060/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username)).text
         #resp = simplejson.loads(resp)
-        ins = WorkFlowAPiRequest(appname='ops', username=self.request.user.username)
-        rstatus, resp = ins.getdata(dict(username=self.request.user.username, per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username))
+        ins = WorkFlowAPiRequest(username=self.request.user.username)
+        rstatus, resp = ins.getdata(dict(per_page=10, name=''), method='get', url='/api/v1.0/tickets/{}/transitions?username={}'.format(pk, username))
         if resp['code'] == 0:
             status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
