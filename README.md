@@ -49,9 +49,9 @@ Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$ source activate loonflow
 (shutongflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow/apps$ python manage.py migrate
 
 ## 导入第三方数据（这里主要是用户数据）
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysqldump -uroot shutongflow < shutongflow.sql
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysql -uroot shutongflow < shutongflow.sql
 ## 导入loonflow数据（配置数据及用户数据）
-(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysqldump -uroot loonflownew < loonflownew.sql
+(loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/shutongFlow$ mysql -uroot loonflownew < loonflownew.sql
 
 ## 启动shutongFlow和loonflow
 (loonflow) Webb@MacBookPro ~/Developer/Python/loonflow/loonflow$  python manage.py runserver 0.0.0.0:6060 # 启动loonflow
