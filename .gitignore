@@ -12,3 +12,4 @@ celerybeat-schedule
 # migtations
 example/
 loonflow/
+.vscode/
