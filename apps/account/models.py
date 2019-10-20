@@ -30,7 +30,7 @@ class ShutongUser(AbstractUser):
     dept = models.IntegerField(verbose_name=u'部门', default=0)
     is_active = models.BooleanField(verbose_name=u'己激活', default=True)
     is_superuser = models.BooleanField(verbose_name=u'超级管理员', default=False)
-    is_staff = models.BooleanField(verbose_name=u'超级管理员', default=False)
+    is_staff = models.BooleanField(verbose_name=u'允许登录admin', default=False)
     created = models.DateTimeField(verbose_name=u'创建时间', auto_now_add=True)
     modified = models.DateTimeField(verbose_name=u'更新时间', auto_now=True)
     deleted = models.BooleanField(verbose_name=u'己删除', default=False)
