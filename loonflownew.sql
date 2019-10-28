@@ -971,7 +971,7 @@ DROP TABLE IF EXISTS `ticket_ticketrecord`;
 
 CREATE TABLE `ticket_ticketrecord` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
+  `title` varchar(500) NOT NULL,
   `workflow_id` int(11) NOT NULL,
   `sn` varchar(25) NOT NULL,
   `state_id` int(11) NOT NULL,
