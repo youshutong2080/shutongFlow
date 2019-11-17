@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.17)
-# Database: loonflownew
-# Generation Time: 2018-10-22 07:40:14 +0000
+# Database: loonflow_demo1
+# Generation Time: 2019-11-17 15:00:05 +0000
 # ************************************************************
 
 
@@ -43,7 +43,7 @@ LOCK TABLES `account_apptoken` WRITE;
 
 INSERT INTO `account_apptoken` (`id`, `app_name`, `token`, `creator`, `gmt_created`, `gmt_modified`, `is_deleted`, `workflow_ids`, `ticket_sn_prefix`)
 VALUES
-	(1,'ops','8cd585da-3cc6-11e8-9946-784f437daad6','admin','2018-04-10 21:53:29.879742','2018-10-22 07:12:32.401998',0,'1,2,3,4','loonflow');
+	(1,'ops','8cd585da-3cc6-11e8-9946-784f437daad6','admin','2018-04-10 21:53:29.879742','2019-11-17 21:45:12.404485',0,'1,2','loonflow');
 
 /*!40000 ALTER TABLE `account_apptoken` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -140,7 +140,7 @@ LOCK TABLES `account_loonuser` WRITE;
 
 INSERT INTO `account_loonuser` (`id`, `password`, `last_login`, `username`, `alias`, `email`, `phone`, `dept_id`, `is_active`, `is_admin`, `creator`, `gmt_created`, `gmt_modified`, `is_deleted`)
 VALUES
-	(1,'pbkdf2_sha256$100000$BoQZquZL9sE7$OVm0zb1beQeWkas/IJBgxCkx8fqXlu9S0NamjmibSw0=','2018-10-18 10:12:43.423735','admin','超级管理员','blackholll@163.com','13888888888',1,1,1,'admin','2018-04-10 16:24:50.146642','2018-05-09 07:02:42.221182',0),
+	(1,'pbkdf2_sha256$100000$BoQZquZL9sE7$OVm0zb1beQeWkas/IJBgxCkx8fqXlu9S0NamjmibSw0=','2019-11-17 22:47:58.561327','admin','超级管理员','blackholll@163.com','13888888888',1,1,1,'admin','2018-04-10 16:24:50.146642','2018-05-09 07:02:42.221182',0),
 	(2,'12222222',NULL,'guiji','轨迹','guiji@163.com','13888888888',3,1,0,'admin','2018-04-14 23:38:18.390197','2018-05-09 07:00:34.120672',0),
 	(3,'12222222',NULL,'lilei','李磊','lilei@163.com','13888888888',2,1,0,'admin','2018-04-14 23:42:25.708830','2018-05-09 07:00:27.999012',0),
 	(4,'12222222',NULL,'zhangsan','张三','zhangsan@163.com','13888888888',4,1,0,'admin','2018-05-05 22:54:48.910667','2018-05-09 07:02:27.252209',0),
@@ -769,11 +769,14 @@ VALUES
 	('gi4p54ka4u6vww4kpqogolmdquj52wup','YTQyMzg3NzMzMzRkZDgxNzU1YWM1OTE3YWExZTFjMDdlMWZmNzM5Zjp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ2MTUwYzAwNmQyNGM0Y2QyNzQ5Zjc2NGE4N2MzZDNlNjY0ZDA5NzgiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2018-04-24 21:38:48.844698'),
 	('gwwul2nmxqyrdzx1wbej4uj0ahzsdwow','YmI5MjhmNmQ3YzFjMjM3ZjgwYTg4ZmRkMjk1MmU0ZGU5ZjI4Nzg0Mjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJiZTkyMDVmNDcxNTM5ZDIwYjg0YzU1MjRjMjUwMWE5MGFjZTA0ZjczIn0=','2018-10-28 16:07:27.753614'),
 	('ikpnzy0jsc0jiede5r6cxhoyagq2payb','YTQyMzg3NzMzMzRkZDgxNzU1YWM1OTE3YWExZTFjMDdlMWZmNzM5Zjp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ2MTUwYzAwNmQyNGM0Y2QyNzQ5Zjc2NGE4N2MzZDNlNjY0ZDA5NzgiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2018-04-24 21:36:50.610586'),
+	('immo7viwmlantgx7ubbwawz7kknhmjgd','M2EwMmViZmQyZDAxZmU2NmE2Njg4OWYxNzk3ZDVkY2E1NmM0NzNiYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiYmU5MjA1ZjQ3MTUzOWQyMGI4NGM1NTI0YzI1MDFhOTBhY2UwNGY3MyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2019-11-26 17:58:31.816749'),
 	('jw2psatj7z4zrur42urk3wluopurpqr1','YmI5MjhmNmQ3YzFjMjM3ZjgwYTg4ZmRkMjk1MmU0ZGU5ZjI4Nzg0Mjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJiZTkyMDVmNDcxNTM5ZDIwYjg0YzU1MjRjMjUwMWE5MGFjZTA0ZjczIn0=','2018-10-21 19:52:52.775319'),
 	('l187tcfmtjwn2yvr407elnm51dqmaa0u','YmI5MjhmNmQ3YzFjMjM3ZjgwYTg4ZmRkMjk1MmU0ZGU5ZjI4Nzg0Mjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiJiZTkyMDVmNDcxNTM5ZDIwYjg0YzU1MjRjMjUwMWE5MGFjZTA0ZjczIn0=','2018-08-13 07:21:42.060139'),
+	('lo8legnunej20ohxp0zegm4r6u22b6zw','ZGM2OGMzMDU3NDBkMTFhY2ViMjNlZjRhNWQyNDRhOTUxNGExNjQ4Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiZTkyMDVmNDcxNTM5ZDIwYjg0YzU1MjRjMjUwMWE5MGFjZTA0ZjczIn0=','2019-12-01 22:47:58.597505'),
 	('qrugroidqpdoepvimz4mtqrsw8elq3px','M2EwMmViZmQyZDAxZmU2NmE2Njg4OWYxNzk3ZDVkY2E1NmM0NzNiYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiYmU5MjA1ZjQ3MTUzOWQyMGI4NGM1NTI0YzI1MDFhOTBhY2UwNGY3MyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2018-06-06 09:50:27.154850'),
 	('rhy3t0ut1v8ev1bqja8sql9htybr95k7','NTU1NDRhMGM1MDIyMDczYmFlY2MzZDdkZTMyYWZlYmYyMGRiMzhiNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiYmU5MjA1ZjQ3MTUzOWQyMGI4NGM1NTI0YzI1MDFhOTBhY2UwNGY3MyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2018-09-05 07:18:38.000344'),
 	('uc120vlnss4jhy3i8kxow00uqbozf6m4','ZGM2OGMzMDU3NDBkMTFhY2ViMjNlZjRhNWQyNDRhOTUxNGExNjQ4Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJiZTkyMDVmNDcxNTM5ZDIwYjg0YzU1MjRjMjUwMWE5MGFjZTA0ZjczIn0=','2018-05-23 06:56:36.173728'),
+	('xg0q3efrgh60a8svbz3qbomctp6eexmq','M2EwMmViZmQyZDAxZmU2NmE2Njg4OWYxNzk3ZDVkY2E1NmM0NzNiYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiYmU5MjA1ZjQ3MTUzOWQyMGI4NGM1NTI0YzI1MDFhOTBhY2UwNGY3MyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2019-11-28 14:11:13.565280'),
 	('yqo3dtnk8pasr19u3qwkgz4bvpv0yg08','NTU1NDRhMGM1MDIyMDczYmFlY2MzZDdkZTMyYWZlYmYyMGRiMzhiNDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiYmU5MjA1ZjQ3MTUzOWQyMGI4NGM1NTI0YzI1MDFhOTBhY2UwNGY3MyIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2018-05-28 10:04:09.557125');
 
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
@@ -1002,11 +1005,7 @@ VALUES
 	(15,'请假哈哈22哈',1,'loonflow_201805130013',2,0,0,5,'creator','lilei','2018-05-13 22:28:21.623510','2018-05-14 07:07:39.579607',0,'lileilileililei','',0,1,0,0,'{}'),
 	(16,'请假申请3',1,'loonflow_201805130014',3,0,0,1,'lilei','lilei','2018-05-13 22:34:12.668018','2018-05-13 22:34:12.668141',0,'lilei','',0,1,0,0,'{}'),
 	(17,'vpn申请2',2,'loonflow_201805150001',10,0,0,3,'1','lilei','2018-05-15 07:16:38.281209','2018-05-22 07:26:54.685116',0,'guiji,wangwu,lilei','zhangsan',1,1,0,0,'{}'),
-	(18,'vpn申请11',2,'loonflow_201805150002',8,0,0,2,'guiji,wangwu','lilei','2018-05-15 07:37:27.984815','2018-05-21 19:27:37.550734',0,'lilei,guiji,wangwu','',0,1,0,0,'{}'),
-	(19,'testt',1,'loonflow_201810190001',5,0,0,0,'','admin','2018-10-19 00:08:40.371908','2018-10-21 20:06:57.527067',0,'jack,admin','',0,1,1,0,'{}'),
-	(20,'teste',1,'loonflow_201810190002',4,0,0,1,'jack','admin','2018-10-19 00:38:41.354008','2018-10-19 00:38:53.872124',0,'jack,admin','',0,1,0,0,'{}'),
-	(22,'tttttt',1,'loonflowhhh_201810220001',3,0,0,1,'jack','jack','2018-10-22 07:12:16.451086','2018-10-22 07:12:16.455740',0,'jack','',0,1,0,0,'{\'jack\': \'jack\'}'),
-	(23,'ttttest',1,'loonflow_201810220002',3,0,0,1,'jack','jack','2018-10-22 08:05:37.187794','2018-10-22 08:05:37.192994',0,'jack','',0,1,0,0,'{\'jack\': \'jack\'}');
+	(18,'vpn申请11',2,'loonflow_201805150002',8,0,0,2,'guiji,wangwu','lilei','2018-05-15 07:37:27.984815','2018-05-21 19:27:37.550734',0,'lilei,guiji,wangwu','',0,1,0,0,'{}');
 
 /*!40000 ALTER TABLE `ticket_ticketrecord` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1114,9 +1113,9 @@ VALUES
 	(6,'发起人-新建中',2,0,0,1,1,5,'creator',1,'{\"vpn_reason\":2, \"title\":2}','{}','admin','2018-05-10 07:34:45.302697','2018-05-15 07:13:06.599270',0,0),
 	(7,'发起人tl-审批中',2,0,0,2,0,5,'creator_tl',2,'{\"sn\":1,  \"title\":1, \"creator\":1, \"gmt_created\":1,  \"vpn_reason\":1}','{}','admin','2018-05-11 06:47:36.381658','2018-05-15 07:19:16.038155',0,0),
 	(8,'运维人员-审批中',2,0,0,3,0,3,'3',1,'{\"sn\":1,  \"title\":1, \"creator\":1, \"gmt_created\":1,  \"vpn_reason\":1,\"participant_info.participant_alias\":1,\"participant_info.participant_name\":1}','{}','admin','2018-05-11 06:48:26.945117','2018-07-14 11:23:28.865836',0,0),
-	(9,'授权脚本-自动执行中',2,0,0,4,0,6,'demo_script.py',1,'{}','{}','admin','2018-05-11 06:50:09.416344','2018-05-11 07:10:25.197748',0,0),
-	(10,'发起人-确认中',2,0,0,6,1,5,'creator',1,'{\"participant_info.participant_name\":1, \"sn\":1, \"state.state_name\":1, \"workflow.workflow_name\":1}','{}','admin','2018-05-11 06:51:02.913212','2018-05-22 22:21:51.867707',0,0),
-	(11,'结束',2,0,0,7,3,0,'',1,'{}','{}','admin','2018-05-11 07:11:53.076731','2018-05-11 07:11:53.076766',0,0);
+	(9,'授权脚本-自动执行中',2,0,0,4,0,6,'1',1,'{}','{}','admin','2018-05-11 06:50:09.416344','2018-05-11 07:10:25.197748',0,0),
+	(10,'发起人-确认中',2,0,0,6,0,5,'creator',1,'{\"workflow.workflow_name\":1,\"sn\":1,\"state.state_name\":1,\"participant_info.participant_name\":1}','{}','admin','2018-05-11 06:51:02.913212','2018-05-22 22:21:51.867707',0,0),
+	(11,'结束',2,0,0,7,2,0,'',1,'{}','{}','admin','2018-05-11 07:11:53.076731','2018-05-11 07:11:53.076766',0,0);
 
 /*!40000 ALTER TABLE `workflow_state` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -1222,6 +1221,15 @@ CREATE TABLE `workflow_workflowscript` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `workflow_workflowscript` WRITE;
+/*!40000 ALTER TABLE `workflow_workflowscript` DISABLE KEYS */;
+
+INSERT INTO `workflow_workflowscript` (`id`, `name`, `saved_name`, `description`, `is_active`, `creator`, `gmt_created`, `gmt_modified`, `is_deleted`)
+VALUES
+	(1,'demo脚本','demo_script.py','示例脚本',1,'admin','2019-11-05 00:00:00.000000','2019-11-05 00:00:00.000000',0);
+
+/*!40000 ALTER TABLE `workflow_workflowscript` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
