@@ -6,7 +6,7 @@ celery==4.1.0
 certifi==2018.4.16
 chardet==3.0.4
 decorator==4.3.0
-Django==2.0.4
+Django==2.2.10
 django-cors-headers==2.2.0
 djangorestframework==3.8.2
 djangorestframework-jwt==1.11.0
