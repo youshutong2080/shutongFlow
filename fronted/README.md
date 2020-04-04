@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# install dependencies. 注意npm版本需要5.6.0以上
 npm install
 
 # serve with hot reload at localhost:8080

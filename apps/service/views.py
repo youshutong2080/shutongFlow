@@ -34,7 +34,7 @@ class LoonFlowAPIView(APIView):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -53,7 +53,7 @@ class LoonFlowInitStateViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -72,7 +72,7 @@ class LoonFlowCreateTicketViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -99,7 +99,7 @@ class LoonFlowTicketViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
     def retrieve(self, request, pk=None):
@@ -113,7 +113,7 @@ class LoonFlowTicketViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
     def partial_update(self, request, pk=None):
@@ -128,7 +128,7 @@ class LoonFlowTicketViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -148,7 +148,7 @@ class LoonFlowStepViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -167,7 +167,7 @@ class LoonFlowTransitionViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 
@@ -186,7 +186,7 @@ class LoonFlowTranActionViewSet(ViewSet):
             return Response({'code': resp['code'], 'data': resp['data'], 'msg': resp['msg']},
                             status=status_resp)
         else:
-            status_resp = status.HTTP_400_BAD_REQUEST
+            status_resp = status.HTTP_200_OK
             return Response({'code': resp['code'], 'data': None, 'msg': resp['msg']}, status=status_resp)
 
 

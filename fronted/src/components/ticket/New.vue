@@ -86,6 +86,9 @@ export default {
     init () {
       this.loading = true
       this.$store.dispatch('api_workflows').then(resp => {
+        if (resp.data.code === -1) {
+          alert(resp.data.msg)
+        }
         this.workflows = resp.data.data.value
         this.loading = false
       })
@@ -95,7 +98,10 @@ export default {
       this.workflow = workflow.value
       this.loading = true
       this.$store.dispatch('api_init_state', {id: workflow.value}).then(resp => {
-        this.init_state = resp.data.data
+        this.init_state = resp.data.data;
+        if (resp.data.code === -1){
+          alert(resp.data.msg);
+        }
         if (this.init_state.field_list) {
           this.$store.dispatch('api_fetch_account_list').then(resp => {
             this.accountList = resp.data.data
