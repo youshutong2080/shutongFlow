@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for apps project.
 
@@ -219,7 +220,7 @@ UEDITER_SETTING = {
 }
 
 
-## 以下需要根据loonlfow的启动地址，apptoken中的应用及token做相应修改
+# the follows should be modify:
 WORKFLOWBACKENDURL = "http://127.0.0.1:6060"
 WORKFLOWTOKEN = "8cd585da-3cc6-11e8-9946-784f437daad6"
 WORKFLOWAPP="ops"
