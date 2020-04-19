@@ -20,6 +20,11 @@ Vue.component(Radio.name, Radio)
 Vue.config.productionTip = false
 Vue.use(iView)
 
+if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = 'http://127.0.0.1:6062/'
+}else if(process.env.NODE_ENV === 'production'){
+  axios.defaults.baseURL = ''
+}
 axios.interceptors.request.use(config => {
   if (localStorage.token) {
     config.headers.Authorization = 'JWT ' + localStorage.token
