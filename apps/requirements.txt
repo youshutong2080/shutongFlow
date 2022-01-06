@@ -2,7 +2,7 @@ amqp==2.2.2
 appnope==0.1.0
 backcall==0.1.0
 billiard==3.5.0.3
-celery==4.1.0
+celery==5.2.2
 certifi==2018.4.16
 chardet==3.0.4
 decorator==4.3.0
