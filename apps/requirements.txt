@@ -3,7 +3,7 @@ appnope==0.1.0
 backcall==0.1.0
 billiard==3.5.0.3
 celery==4.1.0
-certifi==2018.4.16
+certifi==2022.12.7
 chardet==3.0.4
 decorator==4.3.0
 Django==2.0.4
